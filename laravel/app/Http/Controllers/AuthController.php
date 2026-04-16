@@ -20,17 +20,27 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            // role mặc định là 0 (user) do database default 0
         ]);
 
         return redirect()->back()->with('success', 'Đăng ký thành công');
     }
+
     public function login(Request $request)
     {
-        $request->validate(['email' => 'required|email', 'password' => 'required|min:6',]);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('users.index')->with('success', 'Đăng nhập thành công!');
+            $user = Auth::user();
+            if (Auth::attempt($request->only('email', 'password'))) {
+                return redirect()->route('users.index')->with('success', 'Đăng nhập thành công!');
+            }
         }
+
         return back()->withErrors(['email' => 'Sai tài khoản hoặc mật khẩu']);
     }
 }

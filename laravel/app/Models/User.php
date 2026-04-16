@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
+    // Định nghĩa các hằng số role
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
     protected $fillable = [
         'name',
         'email',
@@ -22,6 +25,15 @@ class User extends Authenticatable
         'role'
     ];
 
+    public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isUser()
+    {
+        return $this->role === self::ROLE_USER;
+    }
     protected $hidden = [
         'password',
         'remember_token'
