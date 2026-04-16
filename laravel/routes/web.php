@@ -43,7 +43,11 @@ Route::get('/', function () {
 
 // Điều hướng login
 Route::get('login', [UserController::class, 'login'])->name('login');
+// Xử lý đăng nhập (Trỏ về AuthController theo đúng hàm bạn gửi)
 Route::post('login', [AuthController::class, 'login'])->name('user.authUser');
-// logout
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
+// Xử lý đăng ký (Trỏ về AuthController hàm register)
+Route::post('register', [AuthController::class, 'register'])->name('register');
+
+// Đăng xuất (Lưu ý: Bạn cần thêm hàm logout vào AuthController để không bị lỗi)
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
