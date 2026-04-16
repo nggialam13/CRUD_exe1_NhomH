@@ -3,11 +3,13 @@
 @section('title', 'Cập nhật người dùng')
 
 @section('content')
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card shadow">
-                    <div class="card-header text-center bg-primary text-white">
-                        <h4>Cập nhật</h4>
+<div class="container mt-5">
+    @include('components.breadcrumb', ['breadcrumbs' => ['Users', 'Update']])
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4>Cập nhật</h4>
                     </div>
                     <div class="card-body">
                         @if ($errors->any())
@@ -42,4 +44,5 @@
                 </div>
             </div>
         </div>
+</div>
 @endsection

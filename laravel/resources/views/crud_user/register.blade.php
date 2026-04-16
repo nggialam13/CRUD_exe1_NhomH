@@ -3,11 +3,13 @@
 @section('title', 'Đăng ký')
 
 @section('content')
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card shadow">
-                    <div class="card-header text-center bg-primary text-white">
-                        <h4>Đăng ký</h4>
+<div class="container mt-5">
+    @include('components.breadcrumb', ['breadcrumbs' => ['Users', 'Create']])
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4>Đăng ký</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('users.store') }}" method="POST">
@@ -29,4 +31,5 @@
                 </div>
             </div>
         </div>
+</div>
 @endsection
