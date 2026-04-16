@@ -5,7 +5,9 @@
 @section('content')
 <div class="container mt-5">
     <h2 class="text-center mb-4">Danh sách người dùng</h2>
-
+    <div class="alert alert-info mt-3 text-center">
+        <strong>Tổng số người dùng: {{ $users->total() }}</strong>
+    </div>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -70,5 +72,7 @@
     <div class="d-flex justify-content-center mt-3">
         {{ $users->appends(['search' => $search])->links() }}
     </div>
+
+
 </div>
 @endsection
