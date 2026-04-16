@@ -47,12 +47,17 @@
         </thead>
         <tbody>
             @foreach($users as $user)
+            @php
+                // Highlight search keywords in name and email
+                $highlightedName = $search ? str_ireplace($search, '<mark>' . $search . '</mark>', $user->name) : $user->name;
+                $highlightedEmail = $search ? str_ireplace($search, '<mark>' . $search . '</mark>', $user->email) : $user->email;
+            @endphp
             <tr>
                 <td class="text-center">
                     {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
                 </td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
+                <td>{!! $highlightedName !!}</td>
+                <td>{!! $highlightedEmail !!}</td>
                 <td class="text-center">
                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-secondary btn-sm">View</a>
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
