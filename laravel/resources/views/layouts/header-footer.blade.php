@@ -12,6 +12,7 @@
             flex-direction: column;
             min-height: 100vh;
         }
+
         main {
             flex: 1;
         }
@@ -21,21 +22,24 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand" href="#">Laravel Nhóm H</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" style="gap: 0.5rem;">
                     @auth
-                        <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Danh sách User</a></li>
-                        <li class="nav-item">
-                            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-link nav-link" style="display: inline; padding: 0; border: none; background: none;">Đăng xuất</button>
-                            </form>
-                        </li>
+                    <li class="nav-item"><a class="nav-link ps-2 pe-2" href="{{ route('users.index') }}" style="white-space: nowrap;">Danh sách User</a></li>
+                    <li class="nav-item">
+                        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="nav-link btn btn-link ps-2 pe-2" style="border: none; background: none; white-space: nowrap;">Đăng xuất</button>
+                        </form>
+                    </li>
                     @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Đăng nhập</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Đăng ký</a></li>
+                    <li class="nav-item"><a class="nav-link ps-2 pe-2" href="{{ route('login') }}" style="white-space: nowrap;">Đăng nhập</a></li>
+                    <li class="nav-item"><a class="nav-link ps-2 pe-2" href="{{ route('users.create') }}" style="white-space: nowrap;">Đăng ký</a></li>
                     @endauth
                 </ul>
             </div>
