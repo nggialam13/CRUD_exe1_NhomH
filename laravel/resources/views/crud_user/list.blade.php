@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container mt-5">
+    @include('components.breadcrumb', ['breadcrumbs' => ['Users']])
     <h2 class="text-center mb-4">Danh sách người dùng</h2>
     <div class="alert alert-info mt-3 text-center">
         <strong>Tổng số người dùng: {{ $users->total() }}</strong>
