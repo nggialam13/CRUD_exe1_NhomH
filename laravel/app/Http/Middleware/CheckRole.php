@@ -17,8 +17,8 @@ class CheckRole
 
         // Nếu roles truyền vào là số (0,1) hoặc tên, bạn có thể chuyển đổi
         // Ở đây ta so sánh trực tiếp với giá trị số
-        if (!in_array($userRole, $roles)) {
-            abort(403, 'Bạn không có quyền truy cập.');
+        if (!in_array(auth()->user()->role, $roles)) {
+            return redirect('/')->with('error', 'Bạn không có quyền truy cập.');
         }
 
         return $next($request);
