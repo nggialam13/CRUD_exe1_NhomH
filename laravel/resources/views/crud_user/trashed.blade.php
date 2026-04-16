@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="vi">
+@extends('layouts.header-footer')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Thùng rác</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('title', 'Thùng rác')
 
-<body>
-
-    <div class="container mt-5">
+@section('content')
 
         <h2 class="text-center mb-4">🗑️ Danh sách user đã xóa</h2>
 
@@ -78,7 +71,4 @@
             {{ $users->links() }}
         </div>
 
-    </div>
-
-</body>
-</html>
+@endsection
