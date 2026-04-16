@@ -20,8 +20,6 @@ Route::post('/users/store', [UserController::class, 'store'])->name('users.store
 // EDIT
 Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
 
-// VIEW DETAIL (ĐẶT DƯỚI)
-Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 // UPDATE
 Route::post('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
@@ -29,9 +27,20 @@ Route::post('/users/update/{id}', [UserController::class, 'update'])->name('user
 // DELETE
 Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
 
+// SOFT DELETE
+Route::get('/users/trashed', [UserController::class, 'trashed'])->name('users.trashed');
+Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+Route::delete('/users/{id}/force-delete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
+
+
+
+// VIEW DETAIL (ĐẶT DƯỚI)
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 // Điều hướng login
 Route::get('login', [UserController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('user.authUser');

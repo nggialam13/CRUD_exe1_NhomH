@@ -42,9 +42,15 @@
             </div>
         @endif
         <!-- thêm user-->
-        <a href="{{ route('users.create') }}" class="btn btn-success mb-3">
-            + Thêm User
-        </a>
+        <div class="mb-3">
+            <a href="{{ route('users.create') }}" class="btn btn-success">
+                + Thêm User
+            </a>
+
+            <a href="{{ route('users.trashed') }}" class="btn btn-danger">
+                🗑️ Thùng rác
+            </a>
+        </div>
         <!-- thêm form search-->
         <form method="GET" action="{{ route('users.index') }}" class="mb-3 d-flex">
             <input type="text" name="search" class="form-control me-2" placeholder="Tìm theo tên hoặc email"
