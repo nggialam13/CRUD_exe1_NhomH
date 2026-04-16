@@ -113,7 +113,7 @@ class UserController extends Controller
         $data = $request->all();
 
         if (!empty($request->password)) {
-            $data['password'] = bcrypt($request->password);
+            $data['password'] = $request->password;
         } else {
             unset($data['password']);
         }
@@ -127,8 +127,30 @@ class UserController extends Controller
     {
         // xử lý xóa user
         $user = User::findOrFail($id);
-        $user->delete();
+        $user->delete(); // soft delete
 
-        return redirect()->route('users.index');
+        return redirect()->back()->with('success', 'Xóa user thành công (soft delete)');
+    }
+    // Hiển thị danh sách user đã xóa
+    public function trashed()
+    {
+        $users = User::onlyTrashed()->paginate(10);
+        return view('crud_user.trashed', compact('users'));
+    }
+    // Khôi phục user đã xóa
+    public function restore($id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->restore();
+
+        return redirect()->back()->with('success', 'Khôi phục user thành công');
+    }
+    // Xóa vĩnh viễn
+    public function forceDelete($id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->forceDelete();
+
+        return redirect()->back()->with('success', 'Đã xóa vĩnh viễn');
     }
 }

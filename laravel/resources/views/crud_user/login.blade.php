@@ -1,24 +1,9 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Đăng nhập</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Laravel Nhóm H</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="{{ route('login') }}">Đăng nhập</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Đăng ký</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+@extends('layouts.header-footer')
 
-<main class="container mt-5">
+@section('title', 'Đăng nhập')
+
+@section('content')
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card shadow">
@@ -26,12 +11,13 @@
                     <h4>Đăng nhập</h4>
                 </div>
                 <div class="card-body">
-                    {{-- Hiển thị lỗi chung 
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            {{ $errors->first() }}
-                        </div>
-                    @endif --}}
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                    @endif
 
                     <form method="POST" action="{{ route('user.authUser') }}">
                         @csrf
@@ -56,12 +42,5 @@
             </div>
         </div>
     </div>
-</main>
-
-<footer class="bg-dark text-white text-center p-3 mt-5">
-    <small>&copy; Lập trình web Nhóm H</small>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+@endsection
