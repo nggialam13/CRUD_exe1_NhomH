@@ -50,4 +50,4 @@ Route::post('login', [AuthController::class, 'login'])->name('user.authUser');
 Route::post('register', [AuthController::class, 'register'])->name('register');
 
 // Đăng xuất (Lưu ý: Bạn cần thêm hàm logout vào AuthController để không bị lỗi)
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
