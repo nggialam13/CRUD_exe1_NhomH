@@ -5,7 +5,9 @@
 @section('content')
 <div class="container mt-5">
     <h2 class="text-center mb-4">Danh sách người dùng</h2>
-
+    <div class="alert alert-info mt-3 text-center">
+        <strong>Tổng số người dùng: {{ $users->total() }}</strong>
+    </div>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -45,12 +47,17 @@
         </thead>
         <tbody>
             @foreach($users as $user)
+            @php
+                // Highlight search keywords in name and email
+                $highlightedName = $search ? str_ireplace($search, '<mark>' . $search . '</mark>', $user->name) : $user->name;
+                $highlightedEmail = $search ? str_ireplace($search, '<mark>' . $search . '</mark>', $user->email) : $user->email;
+            @endphp
             <tr>
                 <td class="text-center">
                     {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
                 </td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
+                <td>{!! $highlightedName !!}</td>
+                <td>{!! $highlightedEmail !!}</td>
                 <td class="text-center">
                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-secondary btn-sm">View</a>
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
@@ -70,5 +77,7 @@
     <div class="d-flex justify-content-center mt-3">
         {{ $users->appends(['search' => $search])->links() }}
     </div>
+
+
 </div>
 @endsection
