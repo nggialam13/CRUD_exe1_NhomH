@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -19,7 +20,7 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password // KHÔNG có bcrypt
+            'password' => bcrypt($request->password)
         ]);
 
         return redirect()->back()->with('success', 'Đăng ký thành công');
@@ -28,7 +29,7 @@ class AuthController extends Controller
     {
         $request->validate(['email' => 'required|email', 'password' => 'required|min:6',]);
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/dashboard');
+            return redirect()->route('users.index')->with('success', 'Đăng nhập thành công!');
         }
         return back()->withErrors(['email' => 'Sai tài khoản hoặc mật khẩu']);
     }
